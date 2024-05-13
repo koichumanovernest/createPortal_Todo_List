@@ -3,7 +3,7 @@ import Modal from "./UI/Modal";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import music from "../assets/music.mp3"
+import music from "../assets/music.mp3";
 
 const url = "https://0eb92b2496a8fda4.mokky.dev/modal";
 
@@ -41,7 +41,7 @@ const TodoList = () => {
 		await response.json();
 		getTodos();
 		setInput("");
-		setTexit("")
+		setTexit("");
 	};
 
 	const delteTodos = async (id) => {
@@ -77,27 +77,29 @@ const TodoList = () => {
 			<div>
 				{modal && (
 					<Modal>
-						<StyledModalContent>
-							<StyledTexth1>Todo List</StyledTexth1>
-							<StyledCloseModal onClick={handeleToggleModal}>
-								❌
-							</StyledCloseModal>
-						</StyledModalContent>
-
 						<StyledModalContainer>
-							<StyledInput
-								type="img"
-								value={input}
-								onChange={(e) => setInput(e.target.value)}
-								placeholder="Image..."
-							/>
-							<StyledInput
-								type="text"
-								value={texit}
-								onChange={(e) => setTexit(e.target.value)}
-								placeholder="Text ..."
-							/>
-							<StyledAddTask  onClick={postTodos}>Add Task</StyledAddTask>
+							<StyledModalContent>
+								<StyledTexth1>Todo List</StyledTexth1>
+								<StyledCloseModal onClick={handeleToggleModal}>
+									❌
+								</StyledCloseModal>
+							</StyledModalContent>
+
+							<StyledModalInputContainer>
+								<StyledInput
+									type="img"
+									value={input}
+									onChange={(e) => setInput(e.target.value)}
+									placeholder="Image..."
+								/>
+								<StyledInput
+									type="text"
+									value={texit}
+									onChange={(e) => setTexit(e.target.value)}
+									placeholder="Text ..."
+								/>
+								<StyledAddTask onClick={postTodos}>Add Task</StyledAddTask>
+							</StyledModalInputContainer>
 						</StyledModalContainer>
 					</Modal>
 				)}
@@ -140,7 +142,7 @@ const StyledCloseModal = styled.span`
 `;
 const StyledOpenModal = styled.button`
 	background: #53f953;
-	color: #FF00FF;
+	color: #ff00ff;
 	border: none;
 	width: 150px;
 	height: 40px;
@@ -160,8 +162,20 @@ const StyledButtonContainer = styled.div`
 const StyledModalContainer = styled.div`
 	display: flex;
 	justify-content: center;
-	color: red;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 10px;
+	border: 1px solid red;
 `;
+
+const StyledModalInputContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 500px;
+`;
+
 const StyledDeleteButton = styled.button`
 	padding: 10px 20px;
 	text-transform: uppercase;
@@ -177,15 +191,16 @@ const StyledDeleteButton = styled.button`
 	transition: 0.5s ease;
 	user-select: none;
 	border: 2px solid #676565;
-	&:hover,:focus {
-  color: #ffffff;
-  background: #008cff;
-  border: 1px solid #008cff;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
-  0 0 100px #008cff;
+	&:hover,
+	:focus {
+		color: #ffffff;
+		background: #008cff;
+		border: 1px solid #008cff;
+		text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+		box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+			0 0 100px #008cff;
 	}
-	`
+`;
 
 const StyledMapContainer = styled.div`
 	display: flex;
@@ -210,16 +225,19 @@ const StyledInput = styled.input`
 	font-size: 16px;
 	border-radius: 9999px;
 	box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
-	color: #FF00FF;
+	color: #ff00ff;
 	margin: 5px;
+	/* width: 300px; */
 `;
 const StyledAddTask = styled.button`
 	padding: 10px 20px;
 	text-transform: uppercase;
 	border-radius: 8px;
 	font-size: 17px;
+	width: 150px;
+
 	font-weight: 500;
-	color: #FF00FF;
+	color: #ff00ff;
 	text-shadow: none;
 	background: transparent;
 	cursor: pointer;
@@ -228,15 +246,16 @@ const StyledAddTask = styled.button`
 	transition: 0.5s ease;
 	user-select: none;
 	border: 2px solid #676565;
-	&:hover,:focus {
-  color: #ffffff;
-  background: #008cff;
-  border: 1px solid #008cff;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
-    0 0 100px #008cff;
-}
+	&:hover,
+	:focus {
+		color: #ffffff;
+		background: #008cff;
+		border: 1px solid #008cff;
+		text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+		box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+			0 0 100px #008cff;
+	}
 `;
 const StyledTexth1 = styled.h1`
-color: purple;
-`
+	color: purple;
+`;
