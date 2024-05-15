@@ -3,7 +3,6 @@ import Modal from "./UI/Modal";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import music from "../assets/music.mp3";
 
 const url = "https://0eb92b2496a8fda4.mokky.dev/modal";
 
@@ -13,17 +12,19 @@ const TodoList = () => {
 	const [texit, setTexit] = useState("");
 	const [modal, setModal] = useState(false);
 
+	//! Get Todos
 	const getTodos = async () => {
 		const response = await fetch(url);
 		const data = await response.json();
 		setTodos(data);
 	};
 
-	// console.log(todos);
+	//!Post Todos
 	const postTodos = async () => {
 		const newTodos = {
 			image: input,
 			texit: texit,
+			completed: false,
 		};
 		const response = await fetch(url, {
 			method: "POST",
@@ -43,7 +44,7 @@ const TodoList = () => {
 		setInput("");
 		setTexit("");
 	};
-
+	//! Delete Todos
 	const delteTodos = async (id) => {
 		try {
 			await fetch(`${url}/${id}`, {
@@ -59,14 +60,20 @@ const TodoList = () => {
 			console.error(error);
 		}
 	};
+
+	
+
+	//! UseEffect
 	useEffect(() => {
 		getTodos();
 	}, []);
-
+	//! Modal function
 	const handeleToggleModal = () => {
 		setModal((prev) => !prev);
 	};
 
+
+	// ! return
 	return (
 		<div>
 			<ToastContainer />
@@ -106,12 +113,16 @@ const TodoList = () => {
 			</div>
 			<StyledMapContainer>
 				{todos?.map((item) => (
-					<StyledMapContent key={item.id}>
-						<StyledMapImg src={item.image} alt="" />
-						<StyledMapText>{item.texit}</StyledMapText>
-						<StyledDeleteButton onClick={() => delteTodos(item.id)}>
-							delete
-						</StyledDeleteButton>
+					<StyledMapContent key={item.id} >
+			
+							<>
+								<StyledMapImg src={item.image} alt="" />
+								<StyledMapText>{item.texit}</StyledMapText>
+								<StyledDeleteButton onClick={() => delteTodos(item.id)}>
+									delete
+								</StyledDeleteButton>
+							</>
+							
 					</StyledMapContent>
 				))}
 			</StyledMapContainer>
@@ -165,7 +176,6 @@ const StyledModalContainer = styled.div`
 	align-items: center;
 	flex-direction: column;
 	margin-top: 10px;
-	border: 1px solid red;
 `;
 
 const StyledModalInputContainer = styled.div`
@@ -213,6 +223,12 @@ const StyledMapContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	border: 1px solid white;
+	
+  /* ${(props) =>
+    props.completed &&
+    css`
+      text-decoration: line-through;
+    `} */
 `;
 const StyledMapText = styled.h1`
 	color: white;
